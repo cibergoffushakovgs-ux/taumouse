@@ -1,9 +1,23 @@
 #include <Arduino.h>
 
 #include "drivers/driver_manager.hpp"
-
-int main(){
+void setup(){
     drivers::init();
-    drivers::motor_left.set_voltage(9.0f);
-    drivers::motor_right.set_voltage(9.0f);
+    Serial.begin(115200);
 };
+void loop(){
+
+    for (int x = 0; x < 50; x++){
+    drivers::motor_left.set_voltage(x / 10);
+    drivers::motor_right.set_voltage(x / 10);
+    Serial.println(drivers::battery_driver.get_volts());
+    delay(10);
+    }
+    for (int x = 0; x < 50; x++){
+    drivers::motor_left.set_voltage(-x / 10);
+    drivers::motor_right.set_voltage(-x / 10);
+    Serial.println(drivers::battery_driver.get_volts());
+    delay(10);
+    }
+
+}
