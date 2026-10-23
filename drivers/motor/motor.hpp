@@ -9,7 +9,7 @@ namespace drivers::motor {
         uint8_t polarity;
         float (*get_voltage)();
     };
-        class Motor : public motorParams {
+        class Motor : private motorParams {
         private:
             uint8_t _pwm;
         public:
